@@ -1,0 +1,10 @@
+[2023-01-30T14:57:43.456] [ERROR] warn - warn message from products
+[2023-01-30T14:57:52.240] [WARN] warn - warn message from products
+[2023-01-30T16:14:29.325] [WARN] warn - Producto actualizado. Nuevos datos: 
+ 
+                        Nombre:Redmi Note 10, 
+ 
+                        Price:550 
+ 
+                        Description: 8-RAM 46 PIXELS
+[2023-01-30T16:14:41.047] [WARN] warn - Producto eliminado. ID:74d2987d-0aaa-4146-8866-f1a1d78d105f

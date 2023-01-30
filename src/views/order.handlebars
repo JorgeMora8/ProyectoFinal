@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4834373349.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Nueva compra registrada.</h1>
+    <h4>Se anexa nueva compra de la tienda</h4>
+
+    <b>Productos Vendidos:</b>
+     {{#each productSold}}
+            <h2 class="nombreProducto" style="color:#181818">Nombre: {{name}}.    Precio: ${{price}}</h2>
+    {{/each}}
+</body>
+</html>

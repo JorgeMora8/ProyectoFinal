@@ -21,28 +21,16 @@ export class ProductsRepository{
         if (product_searched == undefined){ 
             throw new Error ("Theres no product saved ")
         }
-
         return new Products(product_searched); 
     }
 
     async deleteById(id_added) { 
-    
-        try{ 
-            await this.dao.deleteById(id_added)
-        }catch(error){ 
-            throw new Error(error)
-        }
+        await this.dao.deleteById(id_added)
     }
 
-
     async getByName(name){ 
-        try{
-            let productFound = await this.dao.getItemByName(name)
-            return productFound
-        }
-        catch(error){
-            throw new Error("There was an error")
-        }
+        return await this.dao.getByName(name)
+            
     }
 
     async updateProduct(productID, productData){ 

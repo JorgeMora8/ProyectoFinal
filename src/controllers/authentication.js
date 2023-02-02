@@ -15,6 +15,6 @@ export async function userAuthentication(req, res){
         loggerInfo.info(`Signed user:${req.body.email}`) 
         res.status(200).json({Auth_correct: token})
     }catch(error){ 
-        res.status(400).json({Method_not_allowed:`${error}`})
+        res.status(400).json({Message: `${error} `})
     }
 }

@@ -3,57 +3,43 @@ import { productDAO } from "../../containers/DAO.js";
 import { ProductsRepository } from "./ProductsRepository.js";
 import createId from "../../resources/getId.js";
 import { loggerInfo, loggerWarn } from "../../loggers/loggers.js";
+import {checkProductValues} from "../../resources/checkAllValues.js";
+import checkProduct from "../../resources/checkProductExits.js";
+import createProduct, {} from "../../resources/CreateProduct.js"
 
 export default class ProductService { 
     constructor(){ 
         this.repository = new ProductsRepository(productDAO)
     }
 
-    async saveProducts({name, price, image, description}){ 
+    async saveProducts(productData){ 
+        const checkProduct = await this.getProductsByName(productData.name)
+        if(checkProduct) throw new Error("One product with this name already exits")
+        const newProduct = createProduct(productData)
 
-
-    const checkProduct = await this.getProductsByName(name)
-    if(checkProduct) throw new Error("One product with this name already exits")
-        try{
-        const newProduct = new Products({ 
-            name:name, 
-            price:price, 
-            image:image, 
-            description:description, 
-            id:createId()
-        })
         await this.repository.save(newProduct); 
-        loggerInfo.info(`Adicion de nuevo producto: ${name}`)
-    }
-    catch(error){ 
-        throw new Error(`The product couldnt be saved. ${error}`)
-    }
-    }
+        loggerInfo.info(`Adicion de nuevo producto: ${productData.name}`)
+        }
 
     async getAllProducts(){ 
-        loggerInfo.info("Despliegue de catalogos de productos.")
         const productsSaved = await this.repository.get()
+        loggerInfo.info("Despliegue de catalogos de productos.")
         return productsSaved.map(products => products.asDTO())
     }
 
     async getProductById(id_added){ 
-        try{ 
             const productSaved = await this.repository.getById(id_added)
             return productSaved.asDTO()
-        }catch (error){ 
-            throw new Error("Product not found")
-        }
     }
 
     async deleteOneProduct(id){ 
-        try{
-           await this.repository.deleteById(id)
-           loggerWarn.warn(`Producto eliminado. ID:${id}`)
-           return ("The product was deleted succesfully")
+        const product = await this.getProductById(id) 
+        if (product == null || undefined) throw new Error("This product doesnt exits")
+
+        await this.repository.deleteById(id)
+        loggerWarn.warn(`Producto eliminado. ID:${id}`)
+        return ("The product was deleted succesfully")
            
-        }catch(error){
-           return(`There product doesnt exits`)
-        }
     }
 
     async getProductsByName(name){ 
@@ -62,14 +48,13 @@ export default class ProductService {
 
     async updateProduct(prodID, newProductData){ 
 
+        await checkProduct(prodID)
+        await checkProductValues(newProductData)
+
         await this.repository.updateProduct(prodID, newProductData)
         loggerWarn.warn(`Producto actualizado. Nuevos datos: \n 
                         Nombre:${newProductData.name}, \n 
                         Price:${newProductData.price} \n 
                         Description: ${newProductData.description}`)
     }
-
-    // async getProductInCar(productId, carID) { 
-    //     return await this.repository.getProductInCar(productId, carID)
-    // }
 }

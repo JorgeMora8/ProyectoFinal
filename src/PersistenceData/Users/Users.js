@@ -2,7 +2,7 @@
 import { encryptPassword } from "../../AuthJWT/bcryptFunctions/bcryptFunction.js"
 
 import { 
-    validateId, 
+    validateAdmin, 
     validateEmail, 
     validatePassword, 
     validateName, 
@@ -17,16 +17,16 @@ export default class User {
     #name
     #lastname 
     #image
-    #role
+    #admin
 
-    constructor({id, email, password, name, lastName, image, role}){ 
+    constructor({id, email, password, name, lastName, image, admin}){ 
         this.#id = id
         this.#email = validateEmail(email)
         this.#password = validatePassword(password)
         this.#name = validateName(name)
         this.#lastname = validateLastName(lastName)
         this.#image = validateUrl(image)
-        this.#role = role
+        this.#admin = validateAdmin(admin)
 
     }
 
@@ -38,8 +38,7 @@ export default class User {
             email : this.#email, 
             password : this.#password, 
             image: this.#image, 
-            role:this.#role
-
+            admin:this.#admin
         })
     }
 }

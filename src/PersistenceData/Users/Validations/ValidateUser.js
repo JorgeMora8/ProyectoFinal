@@ -47,3 +47,10 @@ export function validateUrl(url_image) {
 
     return url_image
 }
+
+export function validateAdmin(adminState){ 
+    if(adminState == null || undefined) { 
+        throw new Error("Admin missing. [true or false]")
+    }
+    return adminState
+}

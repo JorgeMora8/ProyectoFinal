@@ -7,7 +7,6 @@ export default class UserRepository {
 
     async save(classAdded){ 
         let itemData = classAdded.asDTO()
-        // console.log(itemData)
         await this.dao.save(itemData)
         return itemData
     }
@@ -22,24 +21,15 @@ export default class UserRepository {
         if (userSearched == undefined){ 
             throw new Error ("Theres no user saved with this ID")
         }
-
         return new User(userSearched)
     }
 
     async deleteById(userId){ 
-        try{ 
-            await this.dao.deleteById(userId)
-        }catch(error) { 
-            return `There was an error ${error}`
-        }
+        await this.dao.deleteById(userId)
     }
 
 
     async getByEmail(email){ 
-        try {
-            return await this.dao.getByName(email); 
-        } catch (error) {
-            throw new Error("The user doesnt exits")
-        }
+        return await this.dao.getByEmail(email); 
     }
 }

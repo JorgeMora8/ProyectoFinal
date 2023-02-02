@@ -1,6 +1,5 @@
 import {Router} from "express"
 import { authorizedUser } from "../AuthJWT/MiddlewareJWT.js"
-import adminMiddleware from "../AuthJWT/adminMiddleware.js"
 
 import {
     addProductsInCart,

@@ -14,9 +14,8 @@ export default async function createUser(userData){
         id: createId(), 
         image: userData.image, 
         password: passwordHashed, 
-        role: userData.role
+        admin: userData.admin
     })
-
     return userCreated
 
 }

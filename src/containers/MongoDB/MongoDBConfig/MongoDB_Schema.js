@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     name: {type:String, required:true}, 
     lastName: {type:String, required:true}, 
     image: {type:String, required:true}, 
-    role:{type:Boolean, required:true}
+    admin:{type:Boolean, required:true}
 })
 
 const ProductsSchema = new mongoose.Schema({ 
@@ -28,7 +28,7 @@ const OrderSchema = new mongoose.Schema({
     id:{type:String, required:true}, 
     date: {type:String, required:true}, 
     clientId: {type:String, required:true}, 
-    prods:{type:Array, required:true}
+    productList:[]
 })
 
 const UserModel = mongoose.model("users", UserSchema)

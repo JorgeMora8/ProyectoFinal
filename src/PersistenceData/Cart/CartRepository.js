@@ -33,8 +33,7 @@ export default class CartRepository {
         await this.dao.deleteProductInCar(carID, productID)
     }
 
-    //Procede la operacion a la base de datos
-    async getProductInCar(productID, carId) { 
-        return await this.dao.getOneProduct(productID, carId)
+    async deleteAll(carID) { 
+        await this.dao.deleteAllProducts(carID)
     }
 }
